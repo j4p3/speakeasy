@@ -1,11 +1,49 @@
 <html>
 <head>
-	<title>New User</title>
+  <title>New User</title>
+  <link href="stylesheets/screen.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
-<form action="user/new" method="post">
-	<input type="tel" name="number">
-	<input type="submit" value="Call Me (Maybe)">
-</form>
+  <div class="container">
+    <header>
+      <ul class="nav">
+        <li class="logo">Speakeasy</li>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contribute">Contribute</a></li>
+      </ul>
+    </header>
+    <section id="home">
+    <h2>Welcome to the Speakeasy project</h2>
+    <p> Enter a number below to join the Speakeasy project!</p>
+
+    <!-- actual guts of the trial application go here -->
+    <form action="" method="post">
+      <input type="tel" name="number" placeholder="867-5309">
+      <input type="submit" value="Try it!">
+    </form>
+
+  </section>
+  <section id="about">
+    <h2>What does it do?</h2>
+    <p>Whenever a natural or man-made disaster strikes a country, aid workers rush from around the globe to stop the suffering. Unfortunately, most of them do not speak the language of those they are trying to serve.</p>
+    <p>Meanwhile, members of the affected community who are geographically removed from the crisis' epicenter are often unable to contribute beyond watching on television and wiring money home.</p>
+    <p>Speakeasy provides a local phone number for relief workers to call during emergency situations to receive a real human translator to guide them through the language barrier.</p>
+    <h2>How does it work?</h2>
+    <p>Speakeasy uses the Twilio internet calling API to connect callers cheaply anywhere in the world. A high-concurrency node.js server handles and routes calls to ensure fast service when it's needed.</p>
+  </section>
+  <section id="contribute">
+    <h2>How can I participate?</h2>
+    <span>
+      <h4>Translate</h4>
+      <p>Do you speak another language? Support for multiple translator types is coming soon.</p>
+    </span>
+    <span>
+      <h4>Spread the word</h4>
+      <p>Do you know people who work in disaster relief? Tell them about the Speakeasy project!</p>
+    </span>
+  </section>
+
+  </div>
 </body>
 </html>

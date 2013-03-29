@@ -1,0 +1,56 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+//	VARIABLES
+$light_color: rgb(223, 223, 223);
+$dark_color: charcoal;
+$mid_color: blue;
+$highlight_color: orange;
+
+//	MEDIA QUERIES
+
+//	DOM ELEMENTS
+body {
+	font-family: "Helvetica Neue", "Helvetica", "Arial", san-serif;
+	background-color: $light_color;
+}
+section {
+	background: white;
+	border-top: 1px solid $highlight_color;
+	padding: 10px 5px;
+}
+h2 {
+
+}
+.container {
+	width: 960px;
+	margin: auto;
+}
+
+header {
+	display: block;
+	border-bottom: 1px $light_color;
+}
+
+.nav {
+	display: block;
+	float: left;
+	margin: 0px;
+	padding: 0px;
+}
+
+.nav li {
+	float:left;
+	width: 240px;
+	background-color: white;
+	text-align: center;
+	height: 40px;
+	padding-top: 5px;
+}
+
+.nav li:hover {
+	background-color: $light_color;
+}
+
