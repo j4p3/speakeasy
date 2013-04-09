@@ -4,7 +4,8 @@ function route(handlers, pathname, request, response, client) {
   if (typeof handlers[pathname] === 'function') {
     handlers[pathname](response, request, client)
   } else
-  //  invalid urls
+    //  invalid urls
+    console.log("not a valid url");
   {
     console.log("no request handler for " + pathname);
     response.writeHead(404, {"Content-Type": "text/plain"});

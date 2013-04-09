@@ -2,7 +2,7 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-//  views - not very useful at the moment
+//  views
 var index = require('./index');
 var pages = {};
 pages[index] = index;
@@ -35,7 +35,7 @@ function createUser(response, request, client) {
     client.makeCall({
       to: fields.number,
       from: "+16572015873",
-      url: ""},
+      url: 'api.twilio.com'},
       function(err, res) {
         console.log("call made with response data");
         console.log(res);
