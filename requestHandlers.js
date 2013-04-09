@@ -35,7 +35,7 @@ function createUser(response, request, client) {
     client.makeCall({
       to: fields.number,
       from: "+16572015873",
-      url: ""},
+      url: "http://j4p3.com"},
       function(err, res) {
         console.log("call made with response data");
         console.log(res);
