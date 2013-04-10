@@ -6,9 +6,10 @@ var server = require('./server');
 var router = require('./router');
 var requestHandlers = require('./requestHandlers');
 
-var handlers = {};
-handlers['/'] = requestHandlers.home;
-handlers['/user/new'] = requestHandlers.createUser;
+var handle = {};
+handle['/'] = requestHandlers.home;
+handle['/user/new'] = requestHandlers.createUser;
+handle['/favicon.ico'] = requestHandlers.favicon;
 
 console.log("application started");
-server.start(router.route, handlers, client);
+server.start(router.route, handle, client);

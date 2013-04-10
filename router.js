@@ -1,8 +1,8 @@
-function route(handlers, pathname, request, response, client) {
+function route(handle, pathname, request, response, client) {
   console.log("routing "+ pathname);
   //  valid urls
-  if (typeof handlers[pathname] === 'function') {
-    handlers[pathname](response, request, client)
+  if (typeof handle[pathname] === 'function') {
+    handle[pathname](response, request, client)
   } else
   //  invalid urls
   {

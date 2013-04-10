@@ -9,6 +9,11 @@ pages[index] = index;
 //  pages[done] = done;
 
 //  handlers
+function favicon(response, request) {
+  response.writeHead(200, {'Content-Type': 'image/x-icon'} );
+  response.end();
+}
+
 function home(response, request) {
   console.log("request handler home active");
   fs.readFile('./index.html', function(err, data) {
@@ -47,3 +52,4 @@ function createUser(response, request, client) {
 //  exports
 exports.home = home;
 exports.createUser = createUser;
+exports.favicon = favicon;
