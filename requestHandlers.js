@@ -2,14 +2,6 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-// //  views - not very useful at the moment
-// var index = require('views/index.html');
-// var call = require('views/call.html')
-// var pages = {};
-// pages[index] = index;
-// pages[call] = call;
-//  screw views - handle this in express later
-
 //  handlers
 function favicon(response, request) {
   response.writeHead(200, {'Content-Type': 'image/x-icon'} );
