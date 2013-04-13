@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
     <Say voice="woman" language="en-gb">Call successfully completed.</Say>
-    <Gather action="http://node-chat.nfshost.com/call" method="POST" timeout="10" numDigits="1">
-    	<Say>Press 1 for English, 2 for Spanish.</Say>
+    <Gather action="http://node-translator.herokuapp.com/" method="POST" timeout="10" numDigits="1">
+    	<Say voice="woman" language="en-gb">Press 1 for English, 2 for Spanish.</Say>
     </Gather>
 </Response>
