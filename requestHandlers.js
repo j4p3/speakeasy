@@ -1,10 +1,11 @@
 //  modules
 var formidable = require('formidable');
 var fs = require('fs');
+var log = require('./log');
 
 //  render views
 function render(response, view) {
-  console.log("rendering " + view);
+  log.enter("RENDER " + view, "RH");
   fs.readFile('views/' + view + '.html', function(err, data) {
     if (err) throw err;
     response.writeHead(200, {"Content-Type": "text/html"});
@@ -15,45 +16,41 @@ function render(response, view) {
 
 //  handlers
 function favicon(response, request) {
+  //  prevent 404 on obnoxious double request for favicon
   response.writeHead(200, {'Content-Type': 'image/x-icon'} );
   response.end();
 }
 
 function home(response, request) {
   //  render index page
-  console.log("request handler home active");
+  log.enter("HOME", "RH");
   render(response, 'index');
 }
 
 function call(response, request, client) {
-  console.log("request handler call active");
+  log.enter("CALL", "RH");
 
   //  get number
-  console.log("parsing number");
   var form = new formidable.IncomingForm();
   form.parse(request, function(error, fields, files) {
     //  call number
-    console.log("calling number " + fields.number);
     client.makeCall({
       to: fields.number,
       from: "+16572015873",
       url: "http://j4p3.com"},
       function(err, res) {
-        console.log("call made with response data: ");
-        console.log("  " + res.status);
-        console.log("  " + res.message);
+        log.enter("RESPONSE " + res.status, "RH");
     });
   });
 
   //  redirect to call page
-  console.log("rendering call page");
   response.writeHead(302, {"Location": "post_call"});
   response.end();
 }
 
 function postCall(response, request) {
   //  render post-call page
-  console.log("request handler post-call active");
+  log.enter("POST-CALL", "RH");
   render(response, 'post_call');
 }
 

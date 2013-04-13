@@ -1,18 +1,18 @@
+//  modules
 var http = require('http');
 var url = require('url');
 var fs = require('fs');
+var log = require('./log');
 
+//  server
 function start(route, handle, client) {
-
 	function onRequest(request, response) {
 		var pathname = url.parse(request.url).pathname;
-    console.log("request received for "+ pathname);
-    console.log("with http method: " + request.method);
+    log.enter(request.method + " " + pathname, "REQUEST");
 		route(handle, pathname, request, response, client)
 	}
-
 	http.createServer(onRequest).listen(8888);
-	console.log("server started");
+	log.enter("SERVER STARTED");
 }
 
 exports.start = start;
