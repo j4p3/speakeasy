@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Say voice="woman", language="en-gb">What language do you need?</Say>
+    <Gather action="" method="POST" timeout="10" numDigits="1">
+    	<Say>Press 1 for Spanish, 2 for Creole.</Say>
+    </Gather>
+</Response>
