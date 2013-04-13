@@ -1,4 +1,4 @@
-var client = require('twilio')(sid, token);
+var client = require('twilio')();
 var server = require('./server');
 var router = require('./router');
 var requestHandlers = require('./requestHandlers');

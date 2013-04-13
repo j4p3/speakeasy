@@ -2,6 +2,17 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
+//  render views
+function render(response, view) {
+  console.log("rendering " + view);
+  fs.readFile('views/' + view + '.html', function(err, data) {
+    if (err) throw err;
+    response.writeHead(200, {"Content-Type": "text/html"});
+    response.write(data);
+    response.end();
+  });
+}
+
 //  handlers
 function favicon(response, request) {
   response.writeHead(200, {'Content-Type': 'image/x-icon'} );
@@ -11,12 +22,7 @@ function favicon(response, request) {
 function home(response, request) {
   //  render index page
   console.log("request handler home active");
-  fs.readFile('views/index.html', function(err, data) {
-    if (err) throw err;
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write(data);
-    response.end();
-  });
+  render(response, 'index');
 }
 
 function call(response, request, client) {
@@ -47,13 +53,8 @@ function call(response, request, client) {
 
 function postCall(response, request) {
   //  render post-call page
-  console.log("request handler home active");
-  fs.readFile('views/post_call.html', function(err, data) {
-    if (err) throw err;
-    response.writeHead(200, {"Content-Type": "text/html"});
-    response.write(data);
-    response.end();
-  });
+  console.log("request handler post-call active");
+  render(response, 'post_call');
 }
 
 //  exports
