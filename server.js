@@ -4,6 +4,8 @@ var url = require('url');
 var fs = require('fs');
 var log = require('./log');
 
+var port = process.env.PORT || 8888
+
 //  server
 function start(route, handle, client) {
 	function onRequest(request, response) {
@@ -11,7 +13,7 @@ function start(route, handle, client) {
     log.enter(request.method + " " + pathname, "REQUEST");
 		route(handle, pathname, request, response, client)
 	}
-	http.createServer(onRequest).listen(8888);
+	http.createServer(onRequest).listen(port);
 	log.enter("SERVER STARTED");
 }
 
