@@ -9,7 +9,6 @@ var log = require('./log');
 var handle = {};
 handle['/'] = requestHandlers.home;
 handle['/call'] = requestHandlers.call;
-handle['/post_call'] = requestHandlers.post_call;
 handle['/favicon.ico'] = requestHandlers.favicon;
 
 log.enter("APPLICATION STARTED");

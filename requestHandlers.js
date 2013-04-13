@@ -1,14 +1,15 @@
 //  modules
-var formidable = require('formidable');
 var fs = require('fs');
 var log = require('./log');
 
 //  render views
-function render(response, view) {
+function render(response, view, type) {
+  type = type || 'html';
+
   log.enter("RENDER " + view, "RH");
-  fs.readFile('views/' + view + '.html', function(err, data) {
+  fs.readFile(view + '.' + type, function(err, data) {
     if (err) throw err;
-    response.writeHead(200, {"Content-Type": "text/html"});
+    response.writeHead(200, {"Content-Type": "text/" + type});
     response.write(data);
     response.end();
   });
@@ -24,38 +25,23 @@ function favicon(response, request) {
 function home(response, request) {
   //  render index page
   log.enter("HOME", "RH");
-  render(response, 'index');
+  render(response, 'views/index');
 }
 
 function call(response, request, client) {
   log.enter("CALL", "RH");
 
-  //  get number
-  var form = new formidable.IncomingForm();
-  form.parse(request, function(error, fields, files) {
-    //  call number
-    client.makeCall({
-      to: fields.number,
-      from: "+16572015873",
-      url: "http://j4p3.com"},
-      function(err, res) {
-        log.enter("RESPONSE " + res.status, "RH");
-    });
-  });
-
-  //  redirect to call page
-  response.writeHead(302, {"Location": "post_call"});
-  response.end();
-}
-
-function postCall(response, request) {
-  //  render post-call page
-  log.enter("POST-CALL", "RH");
-  render(response, 'post_call');
+  if (request.method = "GET") {
+    //  TWILIO REQUESTING CALL SCRIPT
+    render(response, 'twilio/call', 'xml')
+  } else if (request.method = "POST") {
+    //  TWILIO SENDING DATA
+    log.enter("CALL (NEW DATA FROM TWILIO)", "RH");
+    response.writeHead(200).end();
+  };
 }
 
 //  exports
 exports.home = home;
 exports.call = call;
-exports.post_call = postCall;
 exports.favicon = favicon;

@@ -5,7 +5,7 @@
   "keywords" : ["translator", "voip"],
   "author" : "JP Bonner <bonnerjp@gmail.com>",
   "dependencies": {
-    "twilio" : "1.x.x"
+    "twilio" : "1.1.x"
   },
   "devDependencies": {
     "mocha" : "1.x.x",
@@ -14,5 +14,5 @@
   "scripts": {
     "test" : "make test"
   },
-  "engine" : "node >= 0.8.x"
+  "engine" : { "node" : ">= 0.8" }
 }
