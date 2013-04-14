@@ -1,3 +1,7 @@
+//  debug
+// jslint node: true
+"use strict";
+
 // modules
 var client = require('twilio')();
 var server = require('./server');
@@ -9,7 +13,9 @@ var log = require('./log');
 var handle = {};
 handle['/'] = requestHandlers.home;
 handle['/call'] = requestHandlers.call;
+handle['/call/'] = requestHandlers.call;
 handle['/favicon.ico'] = requestHandlers.favicon;
+handle['/favicon.ico/'] = requestHandlers.favicon;
 
 log.enter("APPLICATION STARTED");
 server.start(router.route, handle, client);
