@@ -6,11 +6,11 @@ var twilio = require('twilio');
 
 function init(callScript) {
   callScript.gather({
-    action: '/callScript',
+    action: '/call',
     method: 'POST',
     numDigits: '1'
   }, function () {
-    this.say('Welcome. Press 1 to request a translation. Press 2 to offer a translation.', {voice: 'woman'});
+    this.say('Welcome. Press 1 to request a translation. Press 2 to offer a translation.', {voice: 'woman', language: 'en-gb'});
   });
 
   return callScript;
@@ -23,7 +23,7 @@ function gather(callScript, digit) {
       method: 'GET',
       numDigits: '1'
     }, function () {
-      this.say('You have selected to request a translation. Press 1 for Spanish. Press 2 for Creole.', {voice: 'woman'});
+      this.say('You have selected to request a translation. Press 1 for Spanish. Press 2 for Creole.', {voice: 'woman', language: 'en-gb'});
     });
   } else if (digit === 2) {
     callScript.gather({
@@ -31,7 +31,7 @@ function gather(callScript, digit) {
       method: 'POST',
       numDigits: '1'
     }, function () {
-      this.say('You have selected to provide a translation. Press 1 if you speak Spanish. Press 2 if you speak Creole.', {voice: 'woman'});
+      this.say('You have selected to provide a translation. Press 1 if you speak Spanish. Press 2 if you speak Creole.', {voice: 'woman', language: 'en-gb'});
     });
   } else {
     callScript.say('Invalid entry.');
