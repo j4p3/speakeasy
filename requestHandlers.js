@@ -17,16 +17,16 @@ function render(response, view, type) {
   fs.readFile(view + '.' + type, function (err, data) {
     if (err) { throw err; }
     response.writeHead(200, {"Content-Type": "text/" + type});
-    response.write(data)
-      .end();
+    response.write(data);
+    response.end();
   });
 }
 
 //  handlers
 function favicon(response, request) {
   //  prevent 404 on obnoxious double request for favicon
-  response.writeHead(200, {'Content-Type': 'image/x-icon'})
-    .end();
+  response.writeHead(200, {'Content-Type': 'image/x-icon'});
+  response.end();
 }
 
 function home(response, request) {
@@ -41,16 +41,16 @@ function call(response, request, client) {
   if (request.method === "GET") {
     //  TWILIO REQUESTING CALL SCRIPT
     var greeting = new twilio.TwimlResponse();
-    response.writeHead(200, {"Content-type": "text/xml"})
-      .write(callActions.init(greeting).toString())
-      .end();
+    response.writeHead(200, {"Content-type": "text/xml"});
+    response.write(callActions.init(greeting).toString());
+    response.end();
 
   } else if (request.method === "POST") {
     //  TWILIO SENDING DATA
     var getInfo = new twilio.TwimlResponse();
-    response.writeHead(200, {"Content-type": "text/xml"})
-      .write(callActions.gather(getInfo, response.digit).toString())
-      .end();
+    response.writeHead(200, {"Content-type": "text/xml"});
+    response.write(callActions.gather(getInfo, response.digit).toString());
+    response.end();
   }
 }
 
