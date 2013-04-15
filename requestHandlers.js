@@ -4,6 +4,7 @@
 
 //  modules
 var fs = require('fs');
+var sys = require('sys');
 var log = require('./log');
 //  potentially separate twilio-specific modules so they don't load on browser hits
 var twilio = require('twilio');
@@ -47,9 +48,11 @@ function call(response, request, client) {
 
   } else if (request.method === "POST") {
     //  TWILIO SENDING DATA
+    log.enter("- POST HANDLER ACTIVE", "RH");
+    log.enter("- " + sys.inspect(request.body), "RH");
     var getInfo = new twilio.TwimlResponse();
     response.writeHead(200, {"Content-type": "text/xml"});
-    response.write(callActions.gather(getInfo, response.digit).toString());
+    response.write(callActions.gather(getInfo, request.body).toString());
     response.end();
   }
 }
