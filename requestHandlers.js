@@ -49,7 +49,7 @@ function call(response, request, client) {
   } else if (request.method === "POST") {
     //  TWILIO SENDING DATA
     log.enter("- POST HANDLER ACTIVE", "RH");
-    log.enter("- " + sys.inspect(request.body), "RH");
+    log.enter("- " + JSON.stringify(request.body), "RH");
     var getInfo = new twilio.TwimlResponse();
     response.writeHead(200, {"Content-type": "text/xml"});
     response.write(callActions.gather(getInfo, request.body).toString());
