@@ -3,6 +3,7 @@
 "use strict";
 
 var twilio = require('twilio');
+var log = require('./log');
 
 function init(callScript) {
   callScript.gather({
@@ -16,8 +17,10 @@ function init(callScript) {
   return callScript;
 }
 
-function gather(callScript, digit) {
-  if (digit === 1) {
+function gather(callScript, digits) {
+  log.enter("GATHER, SELECTION = " + digits, "CALL");
+  if (digits == 1) {
+    log.enter("REQUEST TRANSLATION", "CALL");
     callScript.gather({
       action: '/translator',
       method: 'GET',
@@ -25,7 +28,8 @@ function gather(callScript, digit) {
     }, function () {
       this.say('You have selected to request a translation. Press 1 for Spanish. Press 2 for Creole.', {voice: 'woman', language: 'en-gb'});
     });
-  } else if (digit === 2) {
+  } else if (digits == 2) {
+    log.enter("PROVIDE TRANSLATION", "CALL");
     callScript.gather({
       action: '/translator',
       method: 'POST',

@@ -4,6 +4,7 @@
 
 //  modules
 var fs = require('fs');
+var qs = require('querystring');
 var sys = require('sys');
 var log = require('./log');
 //  potentially separate twilio-specific modules so they don't load on browser hits
@@ -40,20 +41,31 @@ function call(response, request, client) {
   log.enter("CALL", "RH");
 
   if (request.method === "GET") {
-    //  TWILIO REQUESTING CALL SCRIPT
+    //  TWILIO REQUESTING INITIAL CALL SCRIPT
+    log.enter("- NEW CALL REQUEST", "RH");
+
     var greeting = new twilio.TwimlResponse();
     response.writeHead(200, {"Content-type": "text/xml"});
     response.write(callActions.init(greeting).toString());
     response.end();
 
   } else if (request.method === "POST") {
-    //  TWILIO SENDING DATA
-    log.enter("- POST HANDLER ACTIVE", "RH");
-    log.enter("- " + JSON.stringify(request.body), "RH");
-    var getInfo = new twilio.TwimlResponse();
-    response.writeHead(200, {"Content-type": "text/xml"});
-    response.write(callActions.gather(getInfo, request.body).toString());
-    response.end();
+    //  TWILIO SENDING DATA FROM INITIAL CALL SCRIPT
+    request.body = "";
+    request.on('data', function (chunk) {
+      request.body += chunk;
+    });
+    request.on('end', function () {
+      log.enter("- NEW CALL POSTING DATA", "RH");
+      log.enter("- request.body: " + JSON.stringify(qs.parse(request.body)), "RH");
+
+      var digits = qs.parse(request.body).digits;
+      var getInfo = new twilio.TwimlResponse();
+
+      response.writeHead(200, {"Content-type": "text/xml"});
+      response.write(callActions.gather(getInfo, digits).toString());
+      response.end();
+    });
   }
 }
 

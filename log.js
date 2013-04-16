@@ -14,6 +14,9 @@ function enter(data, label) {
   case "RH":
     pre = "        FUNCTION: ";
     break;
+  case "CALL":
+    pre = "          CALL: ";
+    break;
   case 404:
     pre = "  NOT FOUND: ";
     break;
